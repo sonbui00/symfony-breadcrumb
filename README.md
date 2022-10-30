@@ -15,7 +15,7 @@ This bundle is heavily inspired by the inactive thormeier/breadcrumb-bundle
 
 ### Step 1: Composer require
 
-    $ php composer.phar require "azri/breadcrumb-bundle"
+    $ composer require azribilel/symfony-breadcrumb
 
 ### Step2: Enable the bundle in the kernel
 
