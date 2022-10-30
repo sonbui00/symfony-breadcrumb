@@ -1,0 +1,29 @@
+language: php
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+php:
+  - 8.0
+  - 8.1
+
+env:
+  - SYMFONY_VERSION=6.0.*
+  - SYMFONY_VERSION=6.1.*
+
+matrix:
+  fast_finish: true
+
+before_install:
+  - composer self-update
+  - if [ $STABILITY ]; then composer config minimum-stability ${STABILITY}; fi;
+  - composer require --dev symfony/framework-bundle:${SYMFONY_VERSION} --no-update
+
+install:
+  - composer update --ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress
+
+script:
+  - vendor/bin/phpunit --coverage-text

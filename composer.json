@@ -1,0 +1,36 @@
+{
+    "name": "azri/breadcrumb-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony bundle for easy setup of breadcrumbs",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bilel Azri",
+            "email": "azri.bilel@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Azri\\BreadcrumbBundle\\": "" },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "require": {
+        "php": ">=8.0",
+        "symfony/framework-bundle": "6.1.*"
+    },
+    "require-dev": {
+        "twig/twig": "^3.0",
+        "friendsofphp/php-cs-fixer": "^3.11",
+        "phpunit/phpunit": "^9.5"
+    },
+    "suggest": {
+        "twig/twig": "To render breadcrumbs with a twig template"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev"
+        }
+    }
+}
