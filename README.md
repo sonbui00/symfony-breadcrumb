@@ -15,7 +15,7 @@ This bundle is heavily inspired by the inactive thormeier/breadcrumb-bundle
 
 ### Step 1: Composer require
 
-    $ composer require azribilel/symfony-breadcrumb
+    $ composer require azri/symfony-breadcrumb
 
 ### Step2: Enable the bundle in the kernel
 
@@ -29,9 +29,9 @@ This bundle is heavily inspired by the inactive thormeier/breadcrumb-bundle
 
 ## Configuration
 
-Enable the bundle in your config/azri_breadcrumb.yml:
+Enable the bundle in your config/azri_breadcrumb.yaml:
 
-    # config/azri_breadcrumb.yml
+    # config/azri_breadcrumb.yaml
     azri_breadcrumb: ~
 
 The template defaults to a very basic one, providing a `<ul>` with `<li>` and `<a>` for every breadcrumb.
@@ -209,15 +209,15 @@ Call the twig extension as following:
 
 The bundle also provides a default implementation for [Bootstrap](https://getbootstrap.com/docs/4.3/components/breadcrumb/). It can be used as follows:
 
-    # config/azri_breadcrumb.yml
+    # config/azri_breadcrumb.yaml
     azri_breadcrumb:
-        template: @AzriBreadcrumb/breadcrumbs_bootstrap.html.twig
+        template: '@AzriBreadcrumb/breadcrumbs_bootstrap.html.twig'
 
 ### Replacing the default template
 
-If you want to use a custom template, add the following to your config/azri_breadcrumb.yml
+If you want to use a custom template, add the following to your config/azri_breadcrumb.yaml
 
-    # config/azri_breadcrumb.yml
+    # config/azri_breadcrumb.yaml
     azri_breadcrumb:
         template: 'my twig template path'
 
@@ -251,14 +251,14 @@ The model class and/or its collection can be replaced by own implementations, th
 `Azri\BreadcrumbBundle\Model\BreadcrumbInterface` and 
 `Azri\BreadcrumbBundle\Model\BreadcrumbCollectionInterface`:
 
-    # config/azri_breadcrumb.yml
+    # config/azri_breadcrumb.yaml
     azri_breadcrumb:
-        model_class: Acme\Breadcrumbs\Model\MyModel
-        collection_class: Acme\Breadcrumbs\Model\MyCollection
+        model_class: 'Acme\Breadcrumbs\Model\MyModel'
+        collection_class: 'Acme\Breadcrumbs\Model\MyCollection'
 
 The provider service ID can be replaced by setting the parameter `provider_service_id`
 
-    # config/azri_breadcrumb.yml
+    # config/azri_breadcrumb.yaml
     azri_breadcrumb:
         provider_service_id: acme.breadcrumbs.my_provider
 
