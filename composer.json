@@ -3,8 +3,6 @@
     "type": "symfony-bundle",
     "description": "Symfony bundle for easy setup of breadcrumbs",
     "license": "MIT",
-    "minimum-stability": "stable",
-    "prefer-stable": true,
     "authors": [
         {
             "name": "Bilel Azri",
