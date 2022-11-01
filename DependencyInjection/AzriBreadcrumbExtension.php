@@ -45,6 +45,7 @@ class AzriBreadcrumbExtension extends Extension implements ExtensionInterface
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
+        $container->setAlias('Azri\BreadcrumbBundle\Provider\BreadcrumbProviderInterface', $config['provider_service_id']);
         $container->setAlias('azri_breadcrumb.breadcrumb_provider', $config['provider_service_id']);
     }
 }

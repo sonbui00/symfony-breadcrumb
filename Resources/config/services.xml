@@ -4,8 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service alias="azri_breadcrumb.breadcrumb_provider.default"
-                 id="Azri\BreadcrumbBundle\Provider\BreadcrumbProviderInterface"
+        <service id="azri_breadcrumb.breadcrumb_provider.default"
                  class="Azri\BreadcrumbBundle\Provider\BreadcrumbProvider"
                  public="true">
             <argument>%azri_breadcrumb.class.model%</argument>
@@ -13,16 +12,14 @@
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
         </service>
 
-        <service alias="azri.breadcrumb.breadcrumb_extension"
-                 id="Azri\BreadcrumbBundle\Twig\BreadcrumbExtension"
+        <service id="azri.breadcrumb.breadcrumb_extension"
                  class="Azri\BreadcrumbBundle\Twig\BreadcrumbExtension">
             <argument type="service" id="azri_breadcrumb.breadcrumb_provider"/>
             <argument>%azri_breadcrumb.template%</argument>
             <tag name="twig.extension"/>
         </service>
 
-        <service alias="azri_breadcrumb.routing.attach_breadcrumb_loader"
-                 id="Azri\BreadcrumbBundle\Routing\BreadcrumbAttachLoader"
+        <service id="azri_breadcrumb.routing.attach_breadcrumb_loader"
                  class="Azri\BreadcrumbBundle\Routing\BreadcrumbAttachLoader">
             <argument type="service" id="azri_breadcrumb.routing.attach_breadcrumb_loader.inner"/>
         </service>
