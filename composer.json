@@ -1,5 +1,5 @@
 {
-    "name": "azri/breadcrumb-bundle",
+    "name": "azri/symfony-breadcrumb",
     "type": "symfony-bundle",
     "description": "Symfony bundle for easy setup of breadcrumbs",
     "license": "MIT",
