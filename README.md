@@ -24,7 +24,7 @@ This bundle is heavily inspired by the inactive thormeier/breadcrumb-bundle
 
     return [
         // ...
-        Azri\BreadcrumbBundle\ThormeierBreadcrumbBundle::class => ['all' => true],
+        Azri\BreadcrumbBundle\AzriBreadcrumbBundle::class => ['all' => true],
     ];
 
 ## Configuration
