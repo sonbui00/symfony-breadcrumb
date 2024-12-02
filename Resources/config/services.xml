@@ -9,6 +9,7 @@
                  public="true">
             <argument>%azri_breadcrumb.class.model%</argument>
             <argument>%azri_breadcrumb.class.collection%</argument>
+            <argument type="service" id="router" />
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
         </service>
 

@@ -20,13 +20,14 @@ use Azri\BreadcrumbBundle\Model\BreadcrumbCollectionInterface;
 use Azri\BreadcrumbBundle\Model\BreadcrumbInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Breadcrumb factory class that is used to generate and alter breadcrumbs and inject them where needed.
  */
 class BreadcrumbProvider implements BreadcrumbProviderInterface
 {
-    private array $requestBreadcrumbConfig;
+    private array $requestBreadcrumbConfig = [];
 
     private ?BreadcrumbCollectionInterface $breadcrumbs = null;
 
@@ -34,10 +35,13 @@ class BreadcrumbProvider implements BreadcrumbProviderInterface
 
     private string $collectionClass;
 
-    public function __construct(string $modelClass, string $collectionClass)
+    private RouterInterface $router;
+
+    public function __construct(string $modelClass, string $collectionClass, RouterInterface $router)
     {
         $this->modelClass = $modelClass;
         $this->collectionClass = $collectionClass;
+        $this->router = $router;
     }
 
     /**
@@ -83,14 +87,34 @@ class BreadcrumbProvider implements BreadcrumbProviderInterface
 
         $model = $this->modelClass;
 
-        if (null !== $this->requestBreadcrumbConfig) {
-            foreach ($this->requestBreadcrumbConfig as $rawCrumb) {
-                $collection->addBreadcrumb(new $model(
-                    $rawCrumb['label'],
-                    $rawCrumb['route']
-                ));
-            }
+        if (empty($rawCrumb = $this->requestBreadcrumbConfig)) {
+            return $collection;
         }
+
+        $collection->addBreadcrumb(new $model(
+            $rawCrumb['label'],
+            $rawCrumb['route']
+        ));
+
+        $trackRoutes = [];
+
+        do {
+            // If this route already is in the raw collection, there's likely a circular breadcrumb, which will cause memory exhaustion
+            if (isset($trackRoutes[$rawCrumb['route']])) {
+                throw new \LogicException(sprintf('Circular breadcrumbs detected at route "%s"', $rawCrumb['route']));
+            }
+            $collection->addBreadcrumbToStart(new $model(
+                $rawCrumb['label'],
+                $rawCrumb['route'],
+            ));
+            $trackRoutes[$rawCrumb['route']] = true;
+            if (!isset($rawCrumb['parent_route'])) {
+                break;
+            }
+            $pathInfo = $this->router->generate($rawCrumb['parent_route']);
+            $match = $this->router->match($pathInfo);
+            $rawCrumb = $match['_breadcrumbs'] ?? null;
+        } while ($rawCrumb);
 
         return $collection;
     }
